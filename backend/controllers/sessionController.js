@@ -12,25 +12,31 @@ const isStrictlyNumeric = (value) => {
   };
 
 //get a single session
-const getSession = async (req, res) =>{
-    const {id} = req.params
+const getSessionsByUserId = async (req, res) =>{
+    const { id: userId } = req.params; // Extract userId from route parameters
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'no such session'})
+    if (!userId) {
+        return res.status(400).json({ error: 'userId parameter is required' });
     }
 
-    const session = await Session.findById(id)
+    try {
+        // Find sessions that match the userId
+        const sessions = await Session.find({ userId });
 
-    if(!session) {
-        return res.status(404).json({error: 'no session found'})
+        // Check if any sessions were found
+        if (sessions.length === 0) {
+            return res.status(404).json({ error: 'No sessions found for this user' });
+        }
+
+        res.status(200).json(sessions);
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while fetching sessions' });
     }
-
-    res.status(200).json(session)
 }
 
 //create a new session
 const createSession = async (req, res) => {
-    const {duration, stakes, startingStack, endingStack, handCount} = req.body
+    const {userId, duration, stakes, startingStack, endingStack, handCount} = req.body
     
     let fieldErrors = []
     if(!stakes) {
@@ -54,6 +60,7 @@ const createSession = async (req, res) => {
 
     try{//create in DB
         const session = await Session.create({
+            userId,
             duration,
             stakes, 
             startingStack, 
@@ -107,7 +114,7 @@ const updateSession = async (req, res) =>{
 
 
 module.exports = {
-    getSession,
+    getSessionsByUserId,
     getSessions,
     createSession,
     deleteSession,

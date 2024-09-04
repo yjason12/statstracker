@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSessionsContext } from "../hooks/useSessionsContext";
 
-const SessionForm = () => {
+const SessionForm = ({userId}) => {
     const { dispatch } = useSessionsContext();
     const [stakes, setStakes] = useState("");
     const [startingStack, setStartingStack] = useState("");
@@ -51,7 +51,7 @@ const SessionForm = () => {
         // Round to the nearest tenth decimal (one decimal place)
         const roundedHours = Math.round(hours * 10) / 10;
 
-        const session = {duration:roundedHours, stakes, startingStack, endingStack, handCount };
+        const session = {userId, duration:roundedHours, stakes, startingStack, endingStack, handCount };
 
         const response = await fetch('/api/data', {
             method: 'POST',

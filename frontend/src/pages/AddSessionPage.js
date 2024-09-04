@@ -5,11 +5,11 @@ import {useSessionsContext} from "../hooks/useSessionsContext"
 import SessionForm from '../components/SessionForm'
 
 
-const AddSessionPage = () => {
+const AddSessionPage = ({userId}) => {
 
     return (
         <div className="add-session">
-            <SessionForm/>
+            <SessionForm userId={userId}/>
         </div>
     )
 }

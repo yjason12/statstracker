@@ -1,7 +1,7 @@
 const express = require('express')
 const {
     createSession,
-    getSession,
+    getSessionsByUserId,
     getSessions,
     deleteSession,
     updateSession
@@ -12,8 +12,8 @@ const router = express.Router()
 //get all sessions
 router.get('/', getSessions)
 
-//get a single session
-router.get('/:id', getSession)
+//get session by id
+router.get('/user/:id', getSessionsByUserId)
 
 
 //POST a new session

@@ -191,3 +191,25 @@ input.error {
   width: 100vw;
 }
 
+
+/* Styling for the Logout button as plain text */
+header .logout {
+  margin-left: auto; /* Push the logout button to the far right */
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-family: "Poppins";
+  font-weight: 500;
+  background-color: transparent; /* Remove background */
+  border: none; /* Remove border */
+  box-shadow: none; /* Remove shadow */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover effect for the Logout button */
+header .logout:hover {
+  color: var(--primary); /* Change text color on hover */
+}

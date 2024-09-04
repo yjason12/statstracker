@@ -3,7 +3,10 @@ const Schema = mongoose.Schema
 
 
 const sessionSchema = new Schema({
-    
+    userId: {
+        type: Number,
+        require: true
+    },
     duration: {
         type: Number,
         required: true

@@ -1,6 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({onLogOut}) => {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    onLogOut()
+    navigate('/login')
+  }
+
   return (
     <header>
       <div className="container">
@@ -18,9 +25,9 @@ const Navbar = () => {
             <h1>Stats</h1>
           </Link>
         </div>
-        <Link to="/" className="logout">
+        <button onClick={logout} className="logout">
           <h1>Logout</h1>
-        </Link>
+        </button>
       </div>
     </header>
   );
