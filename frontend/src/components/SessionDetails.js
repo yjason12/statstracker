@@ -23,7 +23,10 @@ const SessionDetails = ({session}) => {
         <h4 style={{ color: (session.endingStack - session.startingStack) >= 0 ? '#1aac83' : 'red' }}>
             {session.endingStack - session.startingStack}
         </h4>
-                        
+        <p>
+            <strong>Stakes: {session.stakes}</strong>
+
+        </p>
         <p>
             <strong>Duration: </strong>
                 {session.duration <= 1.0 
@@ -34,6 +37,7 @@ const SessionDetails = ({session}) => {
 
             <p>{formatDistanceToNow(new Date(session.createdAt), {addSuffix: true})}</p>
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+
         </div>
     )
 }

@@ -6,9 +6,9 @@ const getSessions = async(req, res)=> {
     const sessions = await Session.find({}).sort({createdAt:-1})
     res.status(200).json(sessions);
 }
-const isStrictlyNumeric = (value) => {
-    // Check for non-numeric characters
-    return !Number.isNaN(parseFloat(value)) && /^\d+$/.test(value);
+const isNumeric = (value) => {
+    // Allows both integers and decimal numbers
+    return !Number.isNaN(parseFloat(value)) && /^\d*\.?\d+$/.test(value);
   };
 
 //get a single session
@@ -42,13 +42,13 @@ const createSession = async (req, res) => {
     if(!stakes) {
         fieldErrors.push('stakes')
     }
-    if(!startingStack || !isStrictlyNumeric(startingStack)) {
+    if(!startingStack || !isNumeric(startingStack)) {
         fieldErrors.push('startingStack')
     }
-    if(!endingStack || !isStrictlyNumeric(endingStack)){
+    if(!endingStack || !isNumeric(endingStack)){
         fieldErrors.push('endingStack')
     }
-    if(!handCount|| !isStrictlyNumeric(handCount)){
+    if(!handCount|| !isNumeric(handCount)){
         fieldErrors.push('handCount')
     }
 
